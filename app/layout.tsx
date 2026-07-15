@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
     default: "tuna — personal notes & projects",
     template: "%s — tuna",
   },
-  description:
-    "tunaの個人サイト。制作、研究、日々の観察を記録しています。",
+  description: "tunaの個人サイト。制作と文章を静かに記録しています。",
 };
 
 export default function RootLayout({
@@ -28,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
