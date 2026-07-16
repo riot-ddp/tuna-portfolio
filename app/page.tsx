@@ -122,8 +122,8 @@ export default function Home() {
             </div>
 
             <p className="contact">
-              <mark>Contact.</mark> <a href="https://github.com/">GitHub</a> または
-              <a href="mailto:hello@example.com"> email</a> から連絡できます。
+              <mark>Contact.</mark>{" "}
+              <a href="https://github.com/riot-ddp">GitHub</a> から連絡できます。
             </p>
           </main>
 
