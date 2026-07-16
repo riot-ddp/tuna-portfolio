@@ -1,157 +1,135 @@
 import type { Metadata } from "next";
+import { TableOfContents } from "./TableOfContents";
 
 export const metadata: Metadata = {
   title: "tuna — personal notes & projects",
-  description: "tunaの個人サイト。制作と文章を静かに記録しています。",
+  description: "tunaの個人サイト。制作、研究、文章を記録しています。",
 };
 
-const projects = [
-  {
-    year: "2026",
-    type: "Research",
-    title: "Signals in Conversation",
-    description: "会話するAIと、人の判断が変化する瞬間についての研究。",
-  },
-  {
-    year: "2026",
-    type: "Product",
-    title: "Local Memory Map",
-    description: "場所と記憶を結びつけ、日常の発見を残すためのツール。",
-  },
-  {
-    year: "2025",
-    type: "Experiment",
-    title: "Quiet Interface Studies",
-    description: "触れたときの気持ちよさを探る、小さなUI実験の記録。",
-  },
+const tocItems = [
+  { id: "introduction", label: "Introduction", level: 2 },
+  { id: "projects", label: "Projects", level: 2 },
+  { id: "signals-in-conversation", label: "Signals in Conversation", level: 3 },
+  { id: "local-memory-map", label: "Local Memory Map", level: 3 },
+  { id: "quiet-interface-studies", label: "Quiet Interface Studies", level: 3 },
+  { id: "writing", label: "Writing", level: 2 },
+  { id: "about", label: "About", level: 2 },
+  { id: "uses", label: "Uses", level: 2 },
 ] as const;
-
-const writings = [
-  ["2026.07", "自分のためのウェブサイトを、もう一度つくる"],
-  ["2026.06", "会話するAIは、どこまで人を説得できるのか"],
-  ["2026.05", "静かなインターフェースについて考えていること"],
-] as const;
-
-function Arrow() {
-  return <span aria-hidden="true">↗</span>;
-}
 
 export default function Home() {
   return (
-    <main id="top">
-      <a className="skip-link" href="#content">
-        本文へ移動
-      </a>
+    <>
+      <TableOfContents items={tocItems} />
 
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="tuna ホーム">
-          tuna
-        </a>
-        <nav aria-label="メインナビゲーション">
-          <a href="#projects">Projects</a>
-          <a href="#writing">Writing</a>
-          <a href="#about">About</a>
-        </nav>
-      </header>
-
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-inner">
-          <p className="kicker">Personal notes &amp; selected work</p>
-          <h1 id="hero-title">tuna</h1>
-          <p className="hero-copy">
+      <article>
+        <div className="container">
+          <a className="back" href="#introduction">
+            ← Personal notes &amp; selected work
+          </a>
+          <h1 className="document-title">tuna</h1>
+          <p className="subtitle">
             テクノロジーと人のあいだで起きることを、考え、書き、つくっています。
           </p>
-        </div>
-        <div className="hero-foot">
-          <p>Based in Tokyo</p>
-          <p>
-            Currently exploring <span>AI &amp; decision making</span>
-          </p>
-        </div>
-      </section>
+          <p className="date">Personal site / Version 03 / Tokyo</p>
 
-      <div className="content" id="content">
-        <section className="section" id="projects">
-          <header className="section-header">
-            <p className="section-label">01 / Projects</p>
-            <p>Selected work</p>
-          </header>
-
-          <div className="project-list">
-            {projects.map((project) => (
-              <article className="project" key={project.title} tabIndex={0}>
-                <div className="project-meta">
-                  <span>{project.year}</span>
-                  <span>{project.type}</span>
-                </div>
-                <div className="project-main">
-                  <h2>{project.title}</h2>
-                  <p>{project.description}</p>
-                </div>
-                <Arrow />
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="writing">
-          <header className="section-header">
-            <p className="section-label">02 / Writing</p>
-            <p>Notes and essays</p>
-          </header>
-
-          <div className="writing-list">
-            {writings.map(([date, title]) => (
-              <article className="writing" key={title}>
-                <time>{date}</time>
-                <h2>{title}</h2>
-                <Arrow />
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section about" id="about">
-          <header className="section-header">
-            <p className="section-label">03 / About</p>
-            <p>A short introduction</p>
-          </header>
-
-          <div className="about-grid">
-            <p className="about-lead">
-              社会科学、デザイン、ソフトウェアの境界に興味があります。
+          <main className="prose">
+            <h2 id="introduction">Introduction</h2>
+            <p>
+              このサイトは、制作したものと考えたことを、ひとつの場所に残すためにつくっています。完成した成果だけではなく、途中の問いや小さな実験も含みます。
             </p>
-            <div className="about-detail">
-              <p>
-                わからないものを観察して、言葉にし、ときどき動くものにします。完成した成果だけでなく、途中の考えもここに残します。
-              </p>
-              <dl>
-                <div>
-                  <dt>Now</dt>
-                  <dd>会話型AIと意思決定について研究中</dd>
-                </div>
-                <div>
-                  <dt>Uses</dt>
-                  <dd>MacBook Pro, Obsidian, Figma, GitHub</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </section>
+            <p>
+              <mark>現在の関心。</mark>
+              会話型AIが人の判断に与える影響と、テクノロジーを使う人が自分の意思を保つためのデザインを調べています。
+            </p>
 
-        <footer>
-          <p>© 2026 tuna</p>
-          <div>
-            <a href="https://github.com/" target="_blank" rel="noreferrer">
-              GitHub <Arrow />
-            </a>
-            <a href="mailto:hello@example.com">
-              Email <Arrow />
-            </a>
-          </div>
-          <a href="#top">Back to top ↑</a>
-        </footer>
-      </div>
-    </main>
+            <h2 id="projects">Projects</h2>
+            <p>
+              研究、プロダクト、インターフェースの実験から、現在の関心に近いものを選んでいます。
+            </p>
+
+            <h3 id="signals-in-conversation">Signals in Conversation</h3>
+            <p className="item-meta">2026 · Research · AI and interaction</p>
+            <p>
+              会話のなかで、人の判断や態度がどのように変化するのかを観察するリサーチプロジェクトです。対話システムの表現と、受け手の自律性の関係を扱います。
+            </p>
+
+            <h3 id="local-memory-map">Local Memory Map</h3>
+            <p className="item-meta">2026 · Product concept · Mapping</p>
+            <p>
+              場所と記憶を結びつけ、日常の小さな発見を蓄積するためのデジタルツール。効率ではなく、暮らしている場所への愛着を増やすことを目指しています。
+            </p>
+
+            <h3 id="quiet-interface-studies">Quiet Interface Studies</h3>
+            <p className="item-meta">2025 · Interface experiments</p>
+            <p>
+              目立つ演出より、触れた瞬間の理解しやすさを優先した小さなUI実験集です。動き、余白、フィードバックの関係を検討しています。
+            </p>
+
+            <h2 id="writing">Writing</h2>
+            <ul className="writing-list">
+              <li>
+                <time dateTime="2026-07">2026.07</time>
+                <a href="#writing">自分のためのウェブサイトを、もう一度つくる</a>
+              </li>
+              <li>
+                <time dateTime="2026-06">2026.06</time>
+                <a href="#writing">会話するAIは、どこまで人を説得できるのか</a>
+              </li>
+              <li>
+                <time dateTime="2026-05">2026.05</time>
+                <a href="#writing">静かなインターフェースについて考えていること</a>
+              </li>
+            </ul>
+
+            <h2 id="about">About</h2>
+            <p>
+              社会科学、デザイン、ソフトウェアの境界に興味があります。わからないものを観察して、言葉にし、ときどき動くものにします。
+            </p>
+            <blockquote>
+              <p>
+                ここは履歴書の代わりではなく、興味がどのようにつながり、変化してきたかを残す場所です。
+              </p>
+            </blockquote>
+            <p>
+              現在は東京を拠点に、会話型AI、情報環境、人の意思決定について研究と制作を進めています。
+            </p>
+
+            <h2 id="uses">Uses</h2>
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Things I use</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Desk</td>
+                    <td>MacBook Pro, Studio Display, HHKB</td>
+                  </tr>
+                  <tr>
+                    <td>Think</td>
+                    <td>Obsidian, notebook, Readwise</td>
+                  </tr>
+                  <tr>
+                    <td>Create</td>
+                    <td>Figma, VS Code, GitHub</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p className="contact">
+              <mark>Contact.</mark> <a href="https://github.com/">GitHub</a> または
+              <a href="mailto:hello@example.com"> email</a> から連絡できます。
+            </p>
+          </main>
+
+          <footer>© 2026 tuna · Last updated July 2026</footer>
+        </div>
+      </article>
+    </>
   );
 }
